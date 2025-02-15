@@ -3,11 +3,11 @@
 import { browser } from 'webextension-polyfill-ts';
 import { ObsManager } from './obsManager';
 
-const ICON_IDLE = 'icons/icon_idle.png';
-const ICON_PENDING = 'icons/icon_pending.png';
-const ICON_CHECK = 'icons/icon_check.png';
-const ICON_RECORDING = 'icons/icon_recording.png';
-const ICON_ERROR = 'icons/icon_error.png';
+const ICON_IDLE = 'dist/icons/icon_idle.png';
+const ICON_PENDING = 'dist/icons/icon_pending.png';
+const ICON_CHECK = 'dist/icons/icon_check.png';
+const ICON_RECORDING = 'dist/icons/icon_recording.png';
+const ICON_ERROR = 'dist/icons/icon_error.png';
 
 // The structure we'll store in browser.storage.local
 interface ExtensionConfig {
@@ -33,6 +33,7 @@ const obsManager = new ObsManager();
 let connectionError = false;
 let pending = false; // e.g. "connecting to OBS" or "setting param" moment
 let lastSetFilename = '';
+let lastDetectedFilename = '';
 
 // Start by reading config and try connecting
 init();
@@ -127,6 +128,7 @@ async function onUrlVisited(urlString: string) {
       updateIcon();
       await obsManager.setFilenameParameter(newFilename);
       lastSetFilename = newFilename;
+      lastDetectedFilename = newFilename;
       pending = false;
 
       // Double-check it by re-querying
@@ -154,6 +156,7 @@ async function onMessage(message: any, sender: any) {
         defaultFilename: obsManager.getDefaultFilename(),
         connectionError,
         lastSetFilename,
+        detectedFilename: lastDetectedFilename,
       };
     }
     case 'startRecording':

@@ -1,6 +1,9 @@
 import { browser } from 'webextension-polyfill-ts';
 
 const statusEl = document.getElementById('status') as HTMLDivElement;
+const detectedFilenameEl = document.getElementById(
+  'detectedFilename'
+) as HTMLDivElement;
 const filenameEl = document.getElementById('filename') as HTMLDivElement;
 
 const startBtn = document.getElementById('startBtn') as HTMLButtonElement;
@@ -20,6 +23,12 @@ async function refreshStatus() {
     } else {
       const recStr = response.recording ? 'Recording' : 'Not recording';
       statusEl.textContent = `OBS: Connected, ${recStr}`;
+    }
+
+    if (response.detectedFilename) {
+      detectedFilenameEl.textContent = `Detected Filename: ${response.detectedFilename}`;
+    } else {
+      detectedFilenameEl.textContent = `Detected Filename: (none?)`;
     }
 
     if (response.currentFilename) {

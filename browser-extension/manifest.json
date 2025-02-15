@@ -4,8 +4,8 @@
   "version": "1.0.0",
   "description": "Sets OBS recording filename based on visited URLs.",
   "icons": {
-    "48": "icons/icon_idle.png",
-    "128": "icons/icon_idle.png"
+    "48": "dist/icons/icon_idle.png",
+    "128": "dist/icons/icon_idle.png"
   },
 
   "background": {
@@ -20,7 +20,7 @@
 
   "action": {
     "default_popup": "dist/popup.html",
-    "default_icon": "icons/icon_idle.png"
+    "default_icon": "dist/icons/icon_idle.png"
   },
 
   "permissions": ["storage", "tabs", "webNavigation"],

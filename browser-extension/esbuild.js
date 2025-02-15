@@ -36,6 +36,12 @@ esbuild
 const publicDir = path.join(__dirname, 'public');
 if (fs.existsSync(publicDir)) {
   fs.readdirSync(publicDir).forEach((file) => {
-    fs.copyFileSync(path.join(publicDir, file), path.join(outDir, file));
+    const srcPath = path.join(publicDir, file);
+    const destPath = path.join(outDir, file);
+    if (fs.lstatSync(srcPath).isDirectory()) {
+      fs.cpSync(srcPath, destPath, { recursive: true });
+    } else {
+      fs.copyFileSync(srcPath, destPath);
+    }
   });
 }

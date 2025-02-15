@@ -98,11 +98,11 @@ async function drawEmojiFromFile(
 async function generateIcons() {
   for (const { filename, overlayEmoji } of STATES) {
     // 1) Rasterize the main emoji with pango-view
-    const mainFile = rasterizeEmoji(MAIN_EMOJI, 256);
+    const mainFile = rasterizeEmoji(MAIN_EMOJI, 512);
     // 2) Rasterize the overlay emoji (if any)
     let overlayFile: string | null = null;
     if (overlayEmoji) {
-      overlayFile = rasterizeEmoji(overlayEmoji, 128);
+      overlayFile = rasterizeEmoji(overlayEmoji, 512);
     }
 
     // 3) Create a transparent 512x512 canvas
@@ -118,8 +118,8 @@ async function generateIcons() {
     // 5) Draw the overlay in the bottom-right corner (half scale)
     if (overlayFile) {
       // We'll aim for a smaller target size
-      const overlayTargetSize = 200; // half of 400
-      const margin = 20;
+      const overlayTargetSize = 300; // half of 400
+      const margin = 10;
       const centerX = SIZE - overlayTargetSize / 2 - margin;
       const centerY = SIZE - overlayTargetSize / 2 - margin;
       await drawEmojiFromFile(ctx, overlayFile, overlayTargetSize, centerX, centerY);
