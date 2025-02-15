@@ -1,0 +1,19 @@
+{
+  "name": "browser-extension",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc && node esbuild.js",
+    "bundle": "node esbuild.js"
+  },
+  "keywords": [],
+  "author": "Timothy J. Aveni <me@timothyaveni.com> (https://timothyaveni.com/)",
+  "license": "MIT",
+  "description": "",
+  "dependencies": {
+    "esbuild": "^0.25.0",
+    "obs-websocket-js": "^5.0.6",
+    "typescript": "^5.7.3",
+    "webextension-polyfill-ts": "^0.26.0"
+  }
+}

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>OBS Extension Settings</title>
+    <script type="module" src="options.js"></script>
+
+    <style>
+      body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f4f9;
+        color: #333;
+        margin: 0;
+        padding: 20px;
+      }
+
+      main {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: white;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+      }
+
+      h1 {
+        color: #4a90e2;
+        text-align: center;
+      }
+
+      p {
+        margin: 10px 0;
+      }
+
+      label {
+        font-weight: bold;
+      }
+
+      input[type='text'],
+      input[type='number'],
+      input[type='password'],
+      textarea {
+        width: calc(100% - 20px);
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      button {
+        background-color: #4a90e2;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+
+        align-self: end;
+      }
+
+      button:hover {
+        background-color: #357ab8;
+      }
+
+      button:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+      }
+
+      #status {
+        margin-top: 20px;
+        font-size: 14px;
+        color: green;
+      }
+
+      div {
+        margin-bottom: 20px;
+      }
+
+      .pattern {
+        border: 1px solid #ccc;
+        padding: 10px;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+
+        button {
+          margin-top: 10px;
+        }
+
+        textarea {
+          width: 100%;
+          box-sizing: border-box;
+          height: 120px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Video grading extension settings</h1>
+    <main>
+      <p>
+        <label
+          >OBS Host:
+          <input type="text" id="obsHost" />
+        </label>
+      </p>
+      <p>
+        <label
+          >OBS Port:
+          <input type="number" id="obsPort" />
+        </label>
+      </p>
+      <p>
+        <label
+          >OBS Password:
+          <input type="password" id="obsPassword" />
+        </label>
+      </p>
+      <div class="pattern">
+        <p>
+          <label
+            >URL Pattern (regex):
+            <input type="text" id="urlPattern" size="50" />
+          </label>
+        </p>
+        <p>
+          <label
+            >Filename Template:
+            <input type="text" id="filenameTemplate" size="50" />
+          </label>
+        </p>
+        Or set with AI:
+        <textarea id="patternWithAI">
+url matching https://www.gradescope.com/courses/959556/questions/47500567/submissions/2755433215/grade
+
+(for any course/question/sub)
+
+filename should be gradescope_submission_2755433215</textarea
+        >
+        <button id="setPatternWithAI">Set with AI</button>
+      </div>
+      <button id="saveBtn">Save</button>
+      <div id="status"></div>
+    </main>
+  </body>
+</html>

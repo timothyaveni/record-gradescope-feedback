@@ -1,0 +1,33 @@
+{
+  "manifest_version": 3,
+  "name": "Video grading extension",
+  "version": "1.0.0",
+  "description": "Sets OBS recording filename based on visited URLs.",
+  "icons": {
+    "48": "icons/icon_idle.png",
+    "128": "icons/icon_idle.png"
+  },
+
+  "background": {
+    "scripts": ["dist/background.js"],
+    "type": "module"
+  },
+
+  "options_ui": {
+    "page": "dist/options.html",
+    "open_in_tab": true
+  },
+
+  "action": {
+    "default_popup": "dist/popup.html",
+    "default_icon": "icons/icon_idle.png"
+  },
+
+  "permissions": ["storage", "tabs", "webNavigation"],
+
+  "host_permissions": ["<all_urls>"],
+
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; connect-src 'self' http://localhost:4455 ws://localhost:4455 wss://localhost:4455 https://noggin.rea.gent; style-src 'self' 'unsafe-inline';"
+  }
+}
