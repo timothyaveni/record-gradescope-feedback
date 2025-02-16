@@ -8,6 +8,7 @@ const filenameEl = document.getElementById('filename') as HTMLDivElement;
 
 const startBtn = document.getElementById('startBtn') as HTMLButtonElement;
 const stopBtn = document.getElementById('stopBtn') as HTMLButtonElement;
+const retryObsBtn = document.getElementById('retryObsBtn') as HTMLButtonElement;
 const resetBtn = document.getElementById('resetBtn') as HTMLButtonElement;
 const settingsBtn = document.getElementById('settingsBtn') as HTMLButtonElement;
 
@@ -32,9 +33,9 @@ async function refreshStatus() {
     }
 
     if (response.currentFilename) {
-      filenameEl.textContent = `Filename: ${response.currentFilename}`;
+      filenameEl.textContent = `OBS Filename: ${response.currentFilename}`;
     } else {
-      filenameEl.textContent = `Filename: (none?)`;
+      filenameEl.textContent = `OBS Filename: (none?)`;
     }
   } catch (err) {
     console.error('popup: getStatus error', err);
@@ -50,6 +51,10 @@ async function stopRecording() {
   await browser.runtime.sendMessage({ type: 'stopRecording' });
 }
 
+async function retryObsConnection() {
+  await browser.runtime.sendMessage({ type: 'retryObsConnection' });
+}
+
 async function resetFilename() {
   await browser.runtime.sendMessage({ type: 'resetFilename' });
 }
@@ -60,6 +65,7 @@ async function openSettings() {
 
 startBtn.addEventListener('click', startRecording);
 stopBtn.addEventListener('click', stopRecording);
+retryObsBtn.addEventListener('click', retryObsConnection);
 resetBtn.addEventListener('click', resetFilename);
 settingsBtn.addEventListener('click', openSettings);
 

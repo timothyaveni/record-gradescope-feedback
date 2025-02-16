@@ -169,6 +169,9 @@ async function onMessage(message: any, sender: any) {
         return obsManager.stopRecording();
       }
       break;
+    case 'retryObsConnection':
+      await reconnect();
+      break;
     case 'resetFilename':
       if (obsManager.isObsConnected()) {
         pending = true;
@@ -185,27 +188,31 @@ async function onMessage(message: any, sender: any) {
     case 'updateConfig':
       // Reconnect logic or store only?
       await saveConfig(message.config);
-      // If we need to reconnect:
-      connectionError = false;
-      pending = true;
-      updateIcon();
-      try {
-        await obsManager.connect({
-          host: message.config.obsHost,
-          port: message.config.obsPort,
-          password: message.config.obsPassword,
-        });
-        pending = false;
-      } catch (err) {
-        connectionError = true;
-        pending = false;
-      }
-      updateIcon();
+      await reconnect();
       break;
     default:
       break;
   }
   return undefined;
+}
+
+async function reconnect() {
+  connectionError = false;
+  pending = true;
+  updateIcon();
+  try {
+    const config = await loadConfig();
+    await obsManager.connect({
+      host: config.obsHost,
+      port: config.obsPort,
+      password: config.obsPassword,
+    });
+    pending = false;
+  } catch (err) {
+    connectionError = true;
+    pending = false;
+  }
+  updateIcon();
 }
 
 async function loadConfig(): Promise<ExtensionConfig> {
