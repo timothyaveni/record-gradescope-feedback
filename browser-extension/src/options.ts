@@ -35,8 +35,8 @@ async function loadConfig(): Promise<ExtensionConfig> {
     obsHost: config.obsHost ?? 'localhost',
     obsPort: config.obsPort ?? 4455,
     obsPassword: config.obsPassword ?? '',
-    urlPattern: config.urlPattern ?? '',
-    filenameTemplate: config.filenameTemplate ?? '',
+    urlPattern: config.urlPattern ?? 'submissions\/(\\d+)\/grade',
+    filenameTemplate: config.filenameTemplate ?? 'gradescope_submission_$1',
   };
 }
 

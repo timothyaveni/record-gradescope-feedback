@@ -23,8 +23,8 @@ const DEFAULT_CONFIG: ExtensionConfig = {
   obsHost: 'localhost',
   obsPort: 4455,
   obsPassword: '',
-  urlPattern: '',
-  filenameTemplate: '',
+  urlPattern: 'submissions\/(\\d+)\/grade',
+  filenameTemplate: 'gradescope_submission_$1',
 };
 
 const obsManager = new ObsManager();
